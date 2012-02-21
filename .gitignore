@@ -1,0 +1,5 @@
+/emacs.d/elpa/archives/gnu/archive-contents
+*~
+*.elc
+/emacs.d/.ido.last
+/emacs.d/ac-comphist.dat
