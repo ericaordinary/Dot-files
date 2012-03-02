@@ -83,3 +83,8 @@
 (delete-selection-mode t)
 ;; indent on new line
 (define-key global-map (kbd "RET") 'newline-and-indent)
+
+;; nxml modes
+
+(setq auto-mode-alist (cons '("||.module$" . php-mode) auto-mode-alist))
+
