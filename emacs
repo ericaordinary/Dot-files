@@ -12,6 +12,7 @@
  '(inhibit-startup-buffer-menu nil)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice "~/Sites/")
+ '(js-indent-level 2)
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -21,6 +22,8 @@
  )
 
 (add-to-list 'load-path "~/.emacs.d/")
+
+(setq indent-tabs-mode nil)
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
