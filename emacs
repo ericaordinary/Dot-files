@@ -89,7 +89,7 @@
 
 ;; nxml modes
 
-(setq auto-mode-alist (cons '("||.module$" . php-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.module$" . php-mode) auto-mode-alist))
 
 ; TRAMP
 (setq password-cache-expiry 1000)
