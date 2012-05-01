@@ -22,7 +22,43 @@
  '(mumamo-background-chunk-major ((t (:background "#2e3434"))))
  '(mumamo-background-chunk-submode1 ((t (:background "grey30")))))
 
+(setq gtags-global-command "/opt/local/bin/global")
+
 (add-to-list 'load-path "~/.emacs.d/")
+
+(if (file-exists-p "~/.emacs.d/el-get/el-get")
+    (add-to-list 'load-path "~/.emacs.d/el-get/el-get"))
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+   (lambda (s)
+     (end-of-buffer)
+     (eval-print-last-sexp))))
+
+(setq el-get-sources
+
+      '((:name color-theme-tangotango
+               :type git
+               :depends (color-theme)
+               :features color-theme-tangotango
+               :url "git://github.com/russell/color-theme-tangotango.git"
+               :post-init (lambda ()
+                            (color-theme-tangotango)))
+				(:name drupal-mode
+               :type git
+               :features drupal-mode
+               :url "git://github.com/arnested/drupal-mode.git")
+        (:name project-root
+               :type git
+               :url "https://github.com/emacsmirror/project-root.git"
+               :features project-root)			 
+				))
+
+(setq my-packages
+      (append '(color-theme color-theme-tangotango nxhtml autopair drupal-mode project-root)))
+
+(el-get 'sync my-packages)
+
 
 (setq indent-tabs-mode nil)
 
@@ -32,6 +68,8 @@
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
+;; gtags
+(require 'gtags)
 
 ;; SMEX
 (add-to-list 'load-path "~/.emacs.d/smex/")
@@ -45,6 +83,11 @@
 
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+;; Project root
+(setq project-roots
+      `(("Dupal project"
+				 :root-contains-files ("index.php" "cron.php" "install.php")
+         )))
 
 ;; IDO Mode
 (require 'ido)
@@ -52,11 +95,6 @@
 (setq ido-everywhere t)
 (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
 (setq ido-enable-flex-matching t) ;; enable fuzzy matching
-
-
-;; nxhtml-mode
-(load "~/.emacs.d/nxhtml/autostart")
-
 
 ;; js2-mode
 (add-to-list 'load-path "~/.emacs.d/js2-mode")
@@ -110,3 +148,9 @@
   (find-alternate-file
    (concat "/sudo:root@localhost:"
 	   (buffer-file-name (current-buffer)))))
+
+;; Marmalade
+;; (require 'package)
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; (package-initialize)
