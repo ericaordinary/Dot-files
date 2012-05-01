@@ -22,6 +22,10 @@
  '(mumamo-background-chunk-major ((t (:background "#2e3434"))))
  '(mumamo-background-chunk-submode1 ((t (:background "grey30")))))
 
+;;; A quick & ugly PATH solution to Emacs on Mac OSX
+(if (string-equal "darwin" (symbol-name system-type))
+    (setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:" (getenv "PATH"))))
+
 (setq gtags-global-command "/opt/local/bin/global")
 
 (add-to-list 'load-path "~/.emacs.d/")
