@@ -20,28 +20,35 @@
 (setq el-get-sources
 
       '((:name color-theme-tangotango
-               :type git
-               :depends (color-theme)
-               :features color-theme-tangotango
-               :url "git://github.com/russell/color-theme-tangotango.git"
-               :post-init (lambda ()
-                            (color-theme-tangotango)))
+	       :type git
+	       :depends (color-theme)
+	       :features color-theme-tangotango
+	       :url "git://github.com/russell/color-theme-tangotango.git"
+	       :post-init (lambda ()
+			    (color-theme-tangotango)))
 				(:name drupal-mode
-               :type git
-               :features drupal-mode
-               :url "git://github.com/arnested/drupal-mode.git")
-        (:name project-root
-               :type git
-               :url "https://github.com/emacsmirror/project-root.git"
-               :features project-root)
-				(:name popup-kill-ring
-               :type emacswiki
-               :depends (popup pos-tip)
-               :features popup-kill-ring)))
+	       :type git
+	       :features drupal-mode
+	       :url "git://github.com/arnested/drupal-mode.git")
+
+	(:name project-root
+	       :type git
+	       :url "https://github.com/emacsmirror/project-root.git"
+	       :features project-root)
+
+	(:name popup
+	       :type git
+	       :url "https://github.com/m2ym/popup-el.git")
+
+	(:name popup-kill-ring
+	       :type emacswiki
+	       :depends (popup pos-tip)
+	       :features popup-kill-ring)))
 
 (setq my-packages
       (append '(color-theme color-theme-tangotango nxhtml
-      autopair drupal-mode project-root popup-kill-ring)))
+      autopair drupal-mode project-root popup-kill-ring
+      js2-mode magit)))
 
 (el-get nil my-packages)
 
@@ -73,7 +80,7 @@
 (setq project-roots
       `(("Dupal project"
 				 :root-contains-files ("index.php" "cron.php" "install.php")
-         )))
+	 )))
 
 ;; IDO Mode
 (require 'ido)
@@ -89,7 +96,7 @@
 
 ;; autopair mode
 (require 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers_ 
+(autopair-global-mode) ;; enable autopair in all buffers_
 
 ;; auto-complete
 (add-to-list 'load-path "~/.emacs.d/auto-complete")    ; This may not be appeared if you have already added.
@@ -99,7 +106,6 @@
 (ac-config-default)
 
 ;; magit
-(add-to-list 'load-path "~/.emacs.d/magit")
 (require 'magit)
 
 ;; browse kill ring
@@ -128,9 +134,9 @@
 (add-to-list 'tramp-default-proxies-alist
 	     '("\\.nectar\\.org\\.au" nil nil))
 (add-to-list 'tramp-default-proxies-alist
-             '((regexp-quote (system-name)) nil nil))
+	     '((regexp-quote (system-name)) nil nil))
 (add-to-list 'tramp-default-proxies-alist
-             '((regexp-quote "localhost") nil nil))
+	     '((regexp-quote "localhost") nil nil))
 
 ;; Sudo
 (defun sudo-edit-current-file ()

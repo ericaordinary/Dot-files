@@ -23,4 +23,3 @@
   ;; If there is more than one, they won't work right.
  '(mumamo-background-chunk-major ((t (:background "#2e3434"))))
  '(mumamo-background-chunk-submode1 ((t (:background "grey30")))))
-(provide 'settings)
