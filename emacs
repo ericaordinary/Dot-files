@@ -3,7 +3,11 @@
 (setq gtags-global-command "/opt/local/bin/global")
 
 (add-to-list 'load-path "~/.emacs.d/")
-(require 'settings)
+
+;; Load custom settings
+(setq custom-file "~/.emacs.d/settings.el")
+(load custom-file)
+
 (if (file-exists-p "~/.emacs.d/el-get/el-get")
     (add-to-list 'load-path "~/.emacs.d/el-get/el-get"))
 (unless (require 'el-get nil t)
