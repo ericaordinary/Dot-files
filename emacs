@@ -33,13 +33,17 @@
         (:name project-root
                :type git
                :url "https://github.com/emacsmirror/project-root.git"
-               :features project-root)			 
-				))
+               :features project-root)
+				(:name popup-kill-ring
+               :type emacswiki
+               :depends (popup pos-tip)
+               :features popup-kill-ring)))
 
 (setq my-packages
-      (append '(color-theme color-theme-tangotango nxhtml autopair drupal-mode project-root)))
+      (append '(color-theme color-theme-tangotango nxhtml
+      autopair drupal-mode project-root popup-kill-ring)))
 
-(el-get 'sync my-packages)
+(el-get nil my-packages)
 
 
 (setq indent-tabs-mode nil)
@@ -100,6 +104,10 @@
 
 ;; browse kill ring
 (require 'browse-kill-ring)
+
+;; popup kill ring
+(require 'popup-kill-ring)
+(global-set-key "\M-y" 'popup-kill-ring)
 
 (setq default-tab-width 2);
 
