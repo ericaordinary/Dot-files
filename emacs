@@ -139,6 +139,16 @@
 (add-to-list 'tramp-default-proxies-alist
 						 '((regexp-quote "localhost") nil nil))
 
+;; PHP mode
+(add-hook 'php-mode-hook 'auto-fill-mode)
+
+;; JavaScript
+(add-hook 'javascript-mode-hook 'auto-fill-mode)
+(add-hook 'js2-mode-hook 'auto-fill-mode)
+(add-hook 'js2-mode-hook (lambda ()
+													 (setq autopair-dont-activate t)
+													 (autopair-mode -1)))
+
 ;; Sudo
 (defun sudo-edit-current-file ()
   (interactive)
