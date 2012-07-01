@@ -55,6 +55,8 @@
 
 (setq indent-tabs-mode nil)
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
