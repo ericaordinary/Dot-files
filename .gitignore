@@ -3,3 +3,4 @@
 *.elc
 /emacs.d/.ido.last
 /emacs.d/ac-comphist.dat
+/emacs.d/el-get/
