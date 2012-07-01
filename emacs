@@ -20,35 +20,35 @@
 (setq el-get-sources
 
       '((:name color-theme-tangotango
-	       :type git
-	       :depends (color-theme)
-	       :features color-theme-tangotango
-	       :url "git://github.com/russell/color-theme-tangotango.git"
-	       :post-init (lambda ()
-			    (color-theme-tangotango)))
+							 :type git
+							 :depends (color-theme)
+							 :features color-theme-tangotango
+							 :url "git://github.com/russell/color-theme-tangotango.git"
+							 :post-init (lambda ()
+														(color-theme-tangotango)))
 				(:name drupal-mode
-	       :type git
-	       :features drupal-mode
-	       :url "git://github.com/arnested/drupal-mode.git")
+							 :type git
+							 :features drupal-mode
+							 :url "git://github.com/arnested/drupal-mode.git")
 
-	(:name project-root
-	       :type git
-	       :url "https://github.com/emacsmirror/project-root.git"
-	       :features project-root)
+				(:name project-root
+							 :type git
+							 :url "https://github.com/emacsmirror/project-root.git"
+							 :features project-root)
 
-	(:name popup
-	       :type git
-	       :url "https://github.com/m2ym/popup-el.git")
+				(:name popup
+							 :type git
+							 :url "https://github.com/m2ym/popup-el.git")
 
-	(:name popup-kill-ring
-	       :type emacswiki
-	       :depends (popup pos-tip)
-	       :features popup-kill-ring)))
+				(:name popup-kill-ring
+							 :type emacswiki
+							 :depends (popup pos-tip)
+							 :features popup-kill-ring)))
 
 (setq my-packages
       (append '(color-theme color-theme-tangotango nxhtml
-      autopair drupal-mode project-root popup-kill-ring
-      js2-mode magit)))
+														autopair drupal-mode project-root popup-kill-ring
+														js2-mode magit)))
 
 (el-get nil my-packages)
 
@@ -79,8 +79,7 @@
 ;; Project root
 (setq project-roots
       `(("Dupal project"
-				 :root-contains-files ("index.php" "cron.php" "install.php")
-	 )))
+				 :root-contains-files ("index.php" "cron.php" "install.php"))))
 
 ;; IDO Mode
 (require 'ido)
@@ -126,24 +125,24 @@
 
 (setq auto-mode-alist (cons '("\\.module$" . php-mode) auto-mode-alist))
 
-; TRAMP
+;; TRAMP
 (setq password-cache-expiry 1000)
 (set-default 'tramp-default-proxies-alist '())
 (add-to-list 'tramp-default-proxies-alist
-	     '(nil "\\`root\\'" "/ssh:%h:"))
+						 '(nil "\\`root\\'" "/ssh:%h:"))
 (add-to-list 'tramp-default-proxies-alist
-	     '("\\.nectar\\.org\\.au" nil nil))
+						 '("\\.nectar\\.org\\.au" nil nil))
 (add-to-list 'tramp-default-proxies-alist
-	     '((regexp-quote (system-name)) nil nil))
+						 '((regexp-quote (system-name)) nil nil))
 (add-to-list 'tramp-default-proxies-alist
-	     '((regexp-quote "localhost") nil nil))
+						 '((regexp-quote "localhost") nil nil))
 
 ;; Sudo
 (defun sudo-edit-current-file ()
   (interactive)
   (find-alternate-file
    (concat "/sudo:root@localhost:"
-	   (buffer-file-name (current-buffer)))))
+					 (buffer-file-name (current-buffer)))))
 
 ;; Marmalade
 ;; (require 'package)
