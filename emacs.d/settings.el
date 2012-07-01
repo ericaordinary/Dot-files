@@ -16,6 +16,7 @@
  '(js2-basic-offset 2)
  '(require-final-newline t)
  '(show-paren-mode t)
+ '(show-trailing-whitespace t)
  '(vc-follow-symlinks t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
