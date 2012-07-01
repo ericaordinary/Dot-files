@@ -14,6 +14,7 @@
  '(initial-buffer-choice "~/Sites/")
  '(js-indent-level 2)
  '(js2-basic-offset 2)
+ '(require-final-newline t)
  '(show-paren-mode t)
  '(vc-follow-symlinks t))
 (custom-set-faces
