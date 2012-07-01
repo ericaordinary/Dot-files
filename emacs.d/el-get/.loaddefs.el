@@ -182,6 +182,58 @@ mode-hook, i.e.
 
 ;;;***
 
+;;;### (autoloads (highlight-symbol-query-replace highlight-symbol-prev-in-defun
+;;;;;;  highlight-symbol-next-in-defun highlight-symbol-prev highlight-symbol-next
+;;;;;;  highlight-symbol-remove-all highlight-symbol-at-point highlight-symbol-mode)
+;;;;;;  "highlight-symbol" "../../../../.emacs.d/el-get/highlight-symbol/highlight-symbol.el"
+;;;;;;  (20417 59988))
+;;; Generated autoloads from ../../../../.emacs.d/el-get/highlight-symbol/highlight-symbol.el
+
+(autoload 'highlight-symbol-mode "highlight-symbol" "\
+Minor mode that highlights the symbol under point throughout the buffer.
+Highlighting takes place after `highlight-symbol-idle-delay'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'highlight-symbol-at-point "highlight-symbol" "\
+Toggle highlighting of the symbol at point.
+This highlights or unhighlights the symbol at point using the first
+element in of `highlight-symbol-faces'.
+
+\(fn)" t nil)
+
+(autoload 'highlight-symbol-remove-all "highlight-symbol" "\
+Remove symbol highlighting in buffer.
+
+\(fn)" t nil)
+
+(autoload 'highlight-symbol-next "highlight-symbol" "\
+Jump to the next location of the symbol at point within the function.
+
+\(fn)" t nil)
+
+(autoload 'highlight-symbol-prev "highlight-symbol" "\
+Jump to the previous location of the symbol at point within the function.
+
+\(fn)" t nil)
+
+(autoload 'highlight-symbol-next-in-defun "highlight-symbol" "\
+Jump to the next location of the symbol at point within the defun.
+
+\(fn)" t nil)
+
+(autoload 'highlight-symbol-prev-in-defun "highlight-symbol" "\
+Jump to the previous location of the symbol at point within the defun.
+
+\(fn)" t nil)
+
+(autoload 'highlight-symbol-query-replace "highlight-symbol" "\
+*Replace the symbol at point.
+
+\(fn REPLACEMENT)" t nil)
+
+;;;***
+
 ;;;### (autoloads (global-linum-mode linum-mode linum-format) "linum-ex/linum-ex"
 ;;;;;;  "linum-ex/linum-ex.el" (20311 6862))
 ;;; Generated autoloads from linum-ex/linum-ex.el
@@ -452,12 +504,14 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads nil nil ("autopair/autopair.el" "color-theme-tangotango/color-theme-tangotango.el"
+;;;### (autoloads nil nil ("../../../../.emacs.d/el-get/highlight-symbol/highlight-symbol.el"
+;;;;;;  "../../../../.emacs.d/el-get/popup-kill-ring/popup-kill-ring.el"
+;;;;;;  "autopair/autopair.el" "color-theme-tangotango/color-theme-tangotango.el"
 ;;;;;;  "color-theme/color-theme-autoloads.el" "drupal-mode/drupal-tests.el"
 ;;;;;;  "el-get/el-get-install.el" "el-get/el-get.el" "linum-off/linum-off.el"
 ;;;;;;  "nxhtml/autostart.el" "nxhtml/autostart22.el" "nxhtml/nxhtml-base.el"
 ;;;;;;  "nxhtml/nxhtml-loaddefs.el" "nxhtml/web-autoload.el" "project-root/project-root.el")
-;;;;;;  (20375 19636 152277))
+;;;;;;  (20463 41857 595636))
 
 ;;;***
 
