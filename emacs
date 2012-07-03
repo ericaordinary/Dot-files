@@ -1,26 +1,4 @@
 ;; -*- Mode: Emacs-Lisp -*-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(browse-kill-ring-highlight-current-entry t)
- '(css-indent-offset 2)
- '(custom-enabled-themes (quote (wombat)))
- '(dired-use-ls-dired nil)
- '(global-linum-mode t)
- '(inhibit-startup-buffer-menu nil)
- '(inhibit-startup-screen t)
- '(initial-buffer-choice "~/Sites/")
- '(js-indent-level 2)
- '(show-paren-mode t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(mumamo-background-chunk-major ((t (:background "#2e3434"))))
- '(mumamo-background-chunk-submode1 ((t (:background "grey30")))))
 
 ;;; A quick & ugly PATH solution to Emacs on Mac OSX
 (if (string-equal "darwin" (symbol-name system-type))
@@ -29,6 +7,10 @@
 (setq gtags-global-command "/opt/local/bin/global")
 
 (add-to-list 'load-path "~/.emacs.d/")
+
+;; Load custom settings
+(setq custom-file "~/.emacs.d/settings.el")
+(load custom-file)
 
 (if (file-exists-p "~/.emacs.d/el-get/el-get")
     (add-to-list 'load-path "~/.emacs.d/el-get/el-get"))
@@ -42,29 +24,42 @@
 (setq el-get-sources
 
       '((:name color-theme-tangotango
-               :type git
-               :depends (color-theme)
-               :features color-theme-tangotango
-               :url "git://github.com/russell/color-theme-tangotango.git"
-               :post-init (lambda ()
-                            (color-theme-tangotango)))
+							 :type git
+							 :depends (color-theme)
+							 :features color-theme-tangotango
+							 :url "git://github.com/russell/color-theme-tangotango.git"
+							 :post-init (lambda ()
+														(color-theme-tangotango)))
 				(:name drupal-mode
-               :type git
-               :features drupal-mode
-               :url "git://github.com/arnested/drupal-mode.git")
-        (:name project-root
-               :type git
-               :url "https://github.com/emacsmirror/project-root.git"
-               :features project-root)			 
-				))
+							 :type git
+							 :features drupal-mode
+							 :url "git://github.com/arnested/drupal-mode.git")
+
+				(:name project-root
+							 :type git
+							 :url "https://github.com/emacsmirror/project-root.git"
+							 :features project-root)
+
+				(:name popup
+							 :type git
+							 :url "https://github.com/m2ym/popup-el.git")
+
+				(:name popup-kill-ring
+							 :type emacswiki
+							 :depends (popup pos-tip)
+							 :features popup-kill-ring)))
 
 (setq my-packages
-      (append '(color-theme color-theme-tangotango nxhtml autopair drupal-mode project-root)))
+      (append '(color-theme color-theme-tangotango nxhtml
+														autopair drupal-mode project-root popup-kill-ring
+														js2-mode magit)))
 
-(el-get 'sync my-packages)
+(el-get nil my-packages)
 
 
 (setq indent-tabs-mode nil)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -90,8 +85,7 @@
 ;; Project root
 (setq project-roots
       `(("Dupal project"
-				 :root-contains-files ("index.php" "cron.php" "install.php")
-         )))
+				 :root-contains-files ("index.php" "cron.php" "install.php"))))
 
 ;; IDO Mode
 (require 'ido)
@@ -107,7 +101,7 @@
 
 ;; autopair mode
 (require 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers_ 
+(autopair-global-mode) ;; enable autopair in all buffers_
 
 ;; auto-complete
 (add-to-list 'load-path "~/.emacs.d/auto-complete")    ; This may not be appeared if you have already added.
@@ -117,11 +111,14 @@
 (ac-config-default)
 
 ;; magit
-(add-to-list 'load-path "~/.emacs.d/magit")
 (require 'magit)
 
 ;; browse kill ring
 (require 'browse-kill-ring)
+
+;; popup kill ring
+(require 'popup-kill-ring)
+(global-set-key "\M-y" 'popup-kill-ring)
 
 (setq default-tab-width 2);
 
@@ -134,24 +131,34 @@
 
 (setq auto-mode-alist (cons '("\\.module$" . php-mode) auto-mode-alist))
 
-; TRAMP
+;; TRAMP
 (setq password-cache-expiry 1000)
 (set-default 'tramp-default-proxies-alist '())
 (add-to-list 'tramp-default-proxies-alist
-	     '(nil "\\`root\\'" "/ssh:%h:"))
+						 '(nil "\\`root\\'" "/ssh:%h:"))
 (add-to-list 'tramp-default-proxies-alist
-	     '("\\.nectar\\.org\\.au" nil nil))
+						 '("\\.nectar\\.org\\.au" nil nil))
 (add-to-list 'tramp-default-proxies-alist
-             '((regexp-quote (system-name)) nil nil))
+						 '((regexp-quote (system-name)) nil nil))
 (add-to-list 'tramp-default-proxies-alist
-             '((regexp-quote "localhost") nil nil))
+						 '((regexp-quote "localhost") nil nil))
+
+;; PHP mode
+(add-hook 'php-mode-hook 'auto-fill-mode)
+
+;; JavaScript
+(add-hook 'javascript-mode-hook 'auto-fill-mode)
+(add-hook 'js2-mode-hook 'auto-fill-mode)
+(add-hook 'js2-mode-hook (lambda ()
+													 (setq autopair-dont-activate t)
+													 (autopair-mode -1)))
 
 ;; Sudo
 (defun sudo-edit-current-file ()
   (interactive)
   (find-alternate-file
    (concat "/sudo:root@localhost:"
-	   (buffer-file-name (current-buffer)))))
+					 (buffer-file-name (current-buffer)))))
 
 ;; Marmalade
 ;; (require 'package)
