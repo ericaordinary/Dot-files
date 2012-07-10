@@ -2,7 +2,7 @@
 
 ;;; A quick & ugly PATH solution to Emacs on Mac OSX
 (if (string-equal "darwin" (symbol-name system-type))
-    (setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:" (getenv "PATH"))))
+		(setenv "PATH" (concat "/opt/local/bin:/opt/local/sbin:" (getenv "PATH"))))
 
 (setq gtags-global-command "/opt/local/bin/global")
 
@@ -13,17 +13,17 @@
 (load custom-file)
 
 (if (file-exists-p "~/.emacs.d/el-get/el-get")
-    (add-to-list 'load-path "~/.emacs.d/el-get/el-get"))
+		(add-to-list 'load-path "~/.emacs.d/el-get/el-get"))
 (unless (require 'el-get nil t)
-  (url-retrieve
-   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-   (lambda (s)
-     (end-of-buffer)
-     (eval-print-last-sexp))))
+	(url-retrieve
+	 "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
+	 (lambda (s)
+		 (end-of-buffer)
+		 (eval-print-last-sexp))))
 
 (setq el-get-sources
 
-      '((:name color-theme-tangotango
+			'((:name color-theme-tangotango
 							 :type git
 							 :depends (color-theme)
 							 :features color-theme-tangotango
@@ -47,10 +47,23 @@
 				(:name popup-kill-ring
 							 :type emacswiki
 							 :depends (popup pos-tip)
-							 :features popup-kill-ring)))
+							 :features popup-kill-ring)
+
+        (:name color-theme
+							 :type bzr
+							 :options nil
+							 :url "bzr://bzr.savannah.nongnu.org/color-theme/trunk"
+							 :load "color-theme.el"
+							 :features "color-theme"
+							 :post-init (lambda ()
+														(color-theme-initialize)
+														(setq color-theme-is-global t)
+														(setq color-theme-is-cumulative t)
+														(setq color-theme-load-all-themes nil)))))
+
 
 (setq my-packages
-      (append '(color-theme color-theme-tangotango nxhtml
+			(append '(color-theme color-theme-tangotango nxhtml
 														autopair drupal-mode project-root popup-kill-ring
 														js2-mode magit)))
 
@@ -84,7 +97,7 @@
 
 ;; Project root
 (setq project-roots
-      `(("Dupal project"
+			`(("Dupal project"
 				 :root-contains-files ("index.php" "cron.php" "install.php"))))
 
 ;; IDO Mode
@@ -155,9 +168,9 @@
 
 ;; Sudo
 (defun sudo-edit-current-file ()
-  (interactive)
-  (find-alternate-file
-   (concat "/sudo:root@localhost:"
+	(interactive)
+	(find-alternate-file
+	 (concat "/sudo:root@localhost:"
 					 (buffer-file-name (current-buffer)))))
 
 ;; Marmalade
