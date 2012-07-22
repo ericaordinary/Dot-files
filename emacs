@@ -156,6 +156,41 @@
    (concat "/sudo:root@localhost:"
 					 (buffer-file-name (current-buffer)))))
 
+;; Erica's custom functions
+
+(defun drupal-insert-install-footer ()
+	(interactive)
+	(save-excursion
+		(let ((module-name (file-name-sans-extension (file-name-nondirectory test-file-name) )))
+			(goto-char (point-max))
+			(insert " ")
+			(c-hungry-delete-backwards)
+			(insert
+			 (format "
+
+
+// Helper function: Flush all caches and revert feature.
+function _%s_flush_revert() {
+  drupal_flush_all_caches();
+  features_revert(array('%s'));
+}" module-name module-name)))))
+
+
+(defun drupal-create-or-insert-update-hook (drupal-version module-version comment)
+	(interactive "nDrupal Version: \nnModule Version: \nsComment: ")
+	(let ((module-name (file-name-sans-extension (file-name-nondirectory test-file-name) )))
+		;; (sort (mapcar #'car (remove-if-not (lambda (s) (string-match "^.*_update_[0-9][0-9][0-9][0-9]" (car s))) (cdr (assoc "All Functions" temp-functions)))) #'string-lessp)
+	(insert
+	 (format "
+
+/**
+ * %s
+ */
+function %s_update_%d%d%02d() {
+
+}" comment module-name drupal-version module-version 0))
+	))
+
 ;; Marmalade
 ;; (require 'package)
 ;; (add-to-list 'package-archives
