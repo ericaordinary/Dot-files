@@ -178,7 +178,7 @@
 (defun drupal-insert-install-footer ()
 	(interactive)
 	(save-excursion
-		(let ((module-name (file-name-sans-extension (file-name-nondirectory test-file-name) )))
+		(let ((module-name (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))))
 			(goto-char (point-max))
 			(insert " ")
 			(c-hungry-delete-backwards)
@@ -195,7 +195,7 @@ function _%s_flush_revert() {
 
 (defun drupal-create-or-insert-update-hook (drupal-version module-version comment)
 	(interactive "nDrupal Version: \nnModule Version: \nsComment: ")
-	(let ((module-name (file-name-sans-extension (file-name-nondirectory test-file-name) )))
+	(let ((module-name (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))))
 		;; (sort (mapcar #'car (remove-if-not (lambda (s) (string-match "^.*_update_[0-9][0-9][0-9][0-9]" (car s))) (cdr (assoc "All Functions" temp-functions)))) #'string-lessp)
 	(insert
 	 (format "
