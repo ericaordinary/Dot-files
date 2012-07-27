@@ -204,9 +204,18 @@ function _%s_flush_revert() {
  * %s
  */
 function %s_update_%d%d%02d() {
-
-}" comment module-name drupal-version module-version 0))
+  _%s_flush_revert();
+}" comment module-name drupal-version module-version 0 module-name))
 	))
+
+(defun drupal-insert-deployment-note (date)
+	(interactive "sDeployment Date: ")
+	(insert
+	 (format "
+/* --------------------------
+   DEPLOYED TO DEV: %s
+   -------------------------- */
+" date)))
 
 ;; Marmalade
 ;; (require 'package)
