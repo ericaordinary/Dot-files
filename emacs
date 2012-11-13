@@ -217,6 +217,14 @@ function %s_update_%d%d%02d() {
    -------------------------- */
 " date)))
 
+(defun drupal-make-insert-project (module-name module-version module-subdir)
+	(interactive "sModule name: \nsModule version: \nsModule subdir:")
+	(insert
+	 (format "project[%s][version] = '%s'
+project[%s][subdir] = '%s'"
+		module-name module-version module-name module-subdir)))
+
+
 ;; Marmalade
 ;; (require 'package)
 ;; (add-to-list 'package-archives
