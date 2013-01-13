@@ -59,13 +59,18 @@
 														(color-theme-initialize)
 														(setq color-theme-is-global t)
 														(setq color-theme-is-cumulative t)
-														(setq color-theme-load-all-themes nil)))))
+														(setq color-theme-load-all-themes nil)))
+
+				(:name sass-mode
+							 :type git
+							 :url "git://github.com/nex3/sass-mode.git"
+							 :features sass-mode)))
 
 
 (setq my-packages
 			(append '(color-theme color-theme-tangotango nxhtml
 														autopair drupal-mode project-root popup-kill-ring
-														js2-mode magit)))
+														js2-mode magit sass-mode)))
 
 (el-get nil my-packages)
 
@@ -218,10 +223,10 @@ function %s_update_%d%d%02d() {
 " date)))
 
 (defun drupal-make-insert-project (module-name module-version module-subdir)
-	(interactive "sModule name: \nsModule version: \nsModule subdir:")
+	(interactive "sModule name: \nsModule version: \nsModule subdir: ")
 	(insert
-	 (format "project[%s][version] = '%s'
-project[%s][subdir] = '%s'"
+	 (format "projects[%s][version] = '%s'
+projects[%s][subdir] = '%s'"
 		module-name module-version module-name module-subdir)))
 
 
